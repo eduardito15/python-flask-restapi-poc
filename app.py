@@ -10,7 +10,7 @@ files= []
 
 @app.route('/')
 def home():
-    return "App Works!!!"
+    return "App Works V2!!!"
 
 
 @app.route('/api/tasks')
