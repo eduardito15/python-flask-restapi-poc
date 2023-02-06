@@ -35,12 +35,15 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
       
     - name: Fill in the new image ID in the Amazon ECS task definition
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: python-flask-restapi-poc
       id: task-def
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
         container-name: python-flask-restapi-poc
-        image: $PYTHON_FLASK_RESTAPI_POC_IMAGE_TAG
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:$PYTHON_FLASK_RESTAPI_POC_IMAGE_TAG
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
