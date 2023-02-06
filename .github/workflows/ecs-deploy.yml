@@ -28,7 +28,7 @@ jobs:
         
     - name: Download task definition
       run: |
-        aws ecs describe-task-definition --task-definition 	python-flask-restapi-poc --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition python-flask-restapi-poc --query taskDefinition > task-definition.json
         
     - name: Login to Amazon ECR
       id: login-ecr
