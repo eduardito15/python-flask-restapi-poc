@@ -43,7 +43,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: python-flask-restapi-poc
-        image: 458694677747.dkr.ecr.us-east-1.amazonaws.com/python-flask-restapi-poc:0.0.4
+        image: 458694677747.dkr.ecr.us-east-1.amazonaws.com/python-flask-restapi-poc:${{ github.event.inputs.version }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
