@@ -28,7 +28,7 @@ jobs:
         
     - name: Download task definition
       run: |
-        aws ecs describe-task-definition --task-definition my-task-definition-family --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition python-flask-restapi-poc --query taskDefinition > task-definition.json
         
     - name: Login to Amazon ECR
       id: login-ecr
@@ -43,7 +43,7 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: python-flask-restapi-poc
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$PYTHON_FLASK_RESTAPI_POC_IMAGE_TAG
+        image: 458694677747.dkr.ecr.us-east-1.amazonaws.com/python-flask-restapi-poc:${{ github.event.inputs.version }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
