@@ -46,3 +46,9 @@ def upload_file():
       open_file = open(f.filename, "r", encoding="utf8", errors='ignore')
       files.append(open_file.read())
       return 'file uploaded successfully'
+   
+
+@app.route('/clean', methods=['GET'])
+def clean_files():
+    files.clear()
+    return json.dumps({'message': 'Cleaned'})
