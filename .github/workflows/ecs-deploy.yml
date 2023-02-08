@@ -28,7 +28,7 @@ jobs:
         
     - name: Download task definition
       run: |
-        aws ecs describe-task-definition --task-definition python-flask-restapi-poc --query taskDefinition > task-definition.json
+        aws ecs describe-task-definition --task-definition python-flask-restapi --query taskDefinition > task-definition.json
         
     - name: Login to Amazon ECR
       id: login-ecr
@@ -42,13 +42,13 @@ jobs:
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: task-definition.json
-        container-name: python-flask-restapi-poc
+        container-name: python-flask-restapi
         image: 458694677747.dkr.ecr.us-east-1.amazonaws.com/python-flask-restapi-poc:${{ github.event.inputs.version }}
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: flask-restapi-poc
-        cluster: ecs-python-flask-poc-cluster
+        service: python-flask-restapi
+        cluster: ecs-python-flask-cluster
         wait-for-service-stability: true
